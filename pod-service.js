@@ -1,19 +1,17 @@
+// TODO - this is not functioning yet - eventually there is a CameraPod prototype (ie object)
+// that surfaces the controls needed to bend the RPi to our will. This se
 var util = require('util');
-var bleno = require('../..');
+var bleno = require('bleno');
 
-var CamControlCharacteristic = require('./camera-control-characteristic');
-var Cam1Characteristic = require('./camera-1-characteristic');
-var Cam2Characteristic = require('./camera-2-characteristic');
-var ImuCharacteristic = require('./imu-characteristic');
+var CamControlCharacteristic = require('./camera-ctl-characteristic');
+var ImuControlCharacteristic = require('./imu-ctl-characteristic');
 
 function PodService(camerapod) {
     bleno.PrimaryService.call(this, {
         uuid: '13333333333333333333333333101299',
         characteristics: [
-            new PizzaCrustCharacteristic(pizza),
-            new PizzaToppingsCharacteristic(pizza),
-            new PizzaBakeCharacteristic(pizza)
-        ]
+            new CamControlCharacteristic(camerapod),
+            new ImuControlCharacteristic(camerapod),]
     });
 }
 
